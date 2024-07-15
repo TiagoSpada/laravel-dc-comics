@@ -10,7 +10,7 @@ class ComicsController extends Controller
 {
     public function index()
     {
-        $data =[
+        $data = [
             'comics' => Comics::all()
         ];
         return view('comics.index', $data);
@@ -21,7 +21,7 @@ class ComicsController extends Controller
      */
     public function create()
     {
-        //
+        return view('comics.create');
     }
 
     /**
@@ -29,17 +29,30 @@ class ComicsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $dc_comics = new Comics();
+
+        $dc_comics->title = $data['title'];
+        $dc_comics->description = $data['description'];
+        $dc_comics->thumb = $data['thumb'];
+        $dc_comics->price = $data['price'];
+        $dc_comics->series = $data['series'];
+        $dc_comics->sale_date = $data['sale_date'];
+        $dc_comics->type = $data['type'];
+        $dc_comics->artists = $data['artists'];
+        $dc_comics->writers = $data['writers'];
+
+        $dc_comics->save();
+
+        return redirect()->route('comics.show', $dc_comics->id);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Comics $comics)
+    public function show(string $id)
     {
-        $data =[
-            'comics' => $comics
-        ];
+        $comics = Comics::find($id);
         return view('comics.show', compact('comics'));
     }
 

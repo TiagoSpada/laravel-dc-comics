@@ -11,17 +11,35 @@
 </head>
 
 <body>
-    <header>
+    <header class="my-4">
         <div class="container">
-            <h1>lista fumetti</h1>
+            <h1>LISTA FUMETTI</h1>
         </div>
     </header>
     <main>
         <div class="container">
             <div class="row">
                 @foreach ($comics as $fumetto)
-                    <div class="col">
-                        <div>{{ $fumetto['title'] }}</div>
+                    <div class="col-6">
+                        <div class="card mb-3 py-2">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="{{ $fumetto['thumb'] }}" class="img-fluid rounded-start"
+                                        alt="{{ $fumetto['title'] }}">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $fumetto['title'] }}</h5>
+                                        <p class="card-text">{{ $fumetto['writers'] }}</p>
+                                        <p class="card-text"><small class="text-body-secondary">{{ $fumetto['price'] }}$
+                                            </small>
+                                        </p>
+                                        <a href="{{ route('comics.show', $fumetto) }}" class="btn btn-primary">Altri
+                                            dettagli</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 @endforeach
             </div>
