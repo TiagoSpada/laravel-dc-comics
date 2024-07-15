@@ -3,16 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Comics;
 use Illuminate\Http\Request;
 
 class ComicsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $data =[
+            'comics' => Comics::all()
+        ];
+        return view('comics.index', $data);
     }
 
     /**
@@ -34,9 +35,12 @@ class ComicsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Comics $comics)
     {
-        //
+        $data =[
+            'comics' => $comics
+        ];
+        return view('comics.show', compact('comics'));
     }
 
     /**
