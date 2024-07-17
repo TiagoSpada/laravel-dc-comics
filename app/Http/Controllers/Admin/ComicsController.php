@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreComicsRequest;
+use App\Http\Requests\UpdateComicsRequest;
 use App\Models\Comics;
 use Illuminate\Http\Request;
 
@@ -27,10 +29,10 @@ class ComicsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreComicsRequest $request)
     {
-        $data = $request->all();
-        $dc_comics = new Comics();
+        $data = $request->validated();
+        $dc_comic = new Comics();
 
         // $dc_comics->title = $data['title'];
         // $dc_comics->description = $data['description'];
@@ -41,20 +43,19 @@ class ComicsController extends Controller
         // $dc_comics->type = $data['type'];
         // $dc_comics->artists = $data['artists'];
         // $dc_comics->writers = $data['writers'];
-        $dc_comics->fill($data);
-        $dc_comics->save();
+        $dc_comic->fill($data);
+        $dc_comic->save();
 
-        return redirect()->route('comics.show', $dc_comics->id);
+        return redirect()->route('comics.show', $dc_comic->id);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Comics $comic)
     {
-        $comics = Comics::find($id);
-        if ($comics === null) abort(500);
-        return view('comics.show', compact('comics'));
+        if ($comic === null) abort(500);
+        return view('comics.show', compact('comic'));
     }
 
     /**
@@ -62,21 +63,19 @@ class ComicsController extends Controller
      */
     public function edit(string $id)
     {
-        $comics = Comics::findOrFail($id);
+        $comic = Comics::findOrFail($id);
 
-        return view('comics.edit', compact('comics'));
+        return view('comics.edit', compact('comic'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateComicsRequest $request, Comics $comic)
     {
-        $comics = Comics::findOrFail($id);
-        $data = $request->all();
-        $comics->update($data);
-
-        return redirect()->route('comics.show', $comics->id);
+        $data = $request->validated();
+        $comic->update($data);
+        return redirect()->route('comics.show', $comic->id);
     }
 
     /**

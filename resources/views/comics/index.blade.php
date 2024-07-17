@@ -19,18 +19,18 @@
     <main>
         <div class="container">
             <div class="row">
-                @foreach ($comics as $fumetto)
+                @foreach ($comics as $comic)
                     <div class="col-6">
                         <div class="card mb-3 py-2">
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                    <img src="{{ $fumetto['thumb'] }}" class="img-fluid rounded-start"
-                                        alt="{{ $fumetto['title'] }}">
+                                    <img src="{{ $comic['thumb'] }}" class="img-fluid rounded-start"
+                                        alt="{{ $comic['title'] }}">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h5 class="card-title my-3">{{ $fumetto['title'] }}</h5>
-                                        <a href="{{ route('comics.show', $fumetto) }}" class="btn btn-primary">Altri
+                                        <h5 class="card-title my-3">{{ $comic['title'] }}</h5>
+                                        <a href="{{ route('comics.show', $comic) }}" class="btn btn-primary">Altri
                                             dettagli</a>
                                     </div>
                                 </div>

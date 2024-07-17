@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ $comics['title'] }}</title>
+    <title>{{ $comic['title'] }}</title>
     @vite('resources/js/app.js')
 
 </head>
@@ -13,7 +13,7 @@
 <body>
     <header class="py-4">
         <div class="container">
-            <h1 class="text-center">{{ $comics['title'] }}</h1>
+            <h1 class="text-center">{{ $comic['title'] }}</h1>
         </div>
     </header>
     <main>
@@ -22,20 +22,20 @@
 
                 <div class="col-6">
                     <div class="content text-center">
-                        <img src="{{ $comics['thumb'] }}" class="img-fluid rounded-start" alt="{{ $comics['title'] }}">
+                        <img src="{{ $comic['thumb'] }}" class="img-fluid rounded-start" alt="{{ $comic['title'] }}">
                     </div>
                 </div>
                 <div class="col position-relative ">
                     <div class="content ">
-                        <h5 class="mt-2 mb-5">Autori: <br>{{ str_replace(['"', '[', ']'], '', $comics->writers) }}
+                        <h5 class="mt-2 mb-5">Autori: <br>{{ str_replace(['"', '[', ']'], '', $comic->writers) }}
                         </h5>
                         <h5 class="mt-2 mb-5">Disegnatori
-                            <br>{{ str_replace(['"', '[', ']'], '', $comics->artists) }}
+                            <br>{{ str_replace(['"', '[', ']'], '', $comic->artists) }}
                         </h5>
-                        <p class="mb-3 lh-lg">{{ $comics['description'] }}</p>
-                        <div class="fw-semibold font-monospace">Serie: {{ $comics['series'] }} || Tipo:
-                            {{ $comics['type'] }}</div>
-                        <h4 class="position-absolute bottom-0 end-0 "> {{ $comics['price'] }}$</h4>
+                        <p class="mb-3 lh-lg">{{ $comic['description'] }}</p>
+                        <div class="fw-semibold font-monospace">Serie: {{ $comic['series'] }} || Tipo:
+                            {{ $comic['type'] }}</div>
+                        <h4 class="position-absolute bottom-0 end-0 "> {{ $comic['price'] }}$</h4>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                         Torna alla home</a>
                 </div>
                 <div class="col-4 text-end">
-                    <a href="{{ route('comics.edit', $comics->id) }}" class="btn btn-primary my-4 ">Modifica
+                    <a href="{{ route('comics.edit', $comic->id) }}" class="btn btn-primary my-4 ">Modifica
                         dati</a>
                 </div>
             </div>
