@@ -29,11 +29,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h5 class="card-title">{{ $fumetto['title'] }}</h5>
-                                        <p class="card-text">{{ $fumetto['writers'] }}</p>
-                                        <p class="card-text"><small class="text-body-secondary">{{ $fumetto['price'] }}$
-                                            </small>
-                                        </p>
+                                        <h5 class="card-title my-3">{{ $fumetto['title'] }}</h5>
                                         <a href="{{ route('comics.show', $fumetto) }}" class="btn btn-primary">Altri
                                             dettagli</a>
                                     </div>

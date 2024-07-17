@@ -32,16 +32,16 @@ class ComicsController extends Controller
         $data = $request->all();
         $dc_comics = new Comics();
 
-        $dc_comics->title = $data['title'];
-        $dc_comics->description = $data['description'];
-        $dc_comics->thumb = $data['thumb'];
-        $dc_comics->price = $data['price'];
-        $dc_comics->series = $data['series'];
-        $dc_comics->sale_date = $data['sale_date'];
-        $dc_comics->type = $data['type'];
-        $dc_comics->artists = $data['artists'];
-        $dc_comics->writers = $data['writers'];
-
+        // $dc_comics->title = $data['title'];
+        // $dc_comics->description = $data['description'];
+        // $dc_comics->thumb = $data['thumb'];
+        // $dc_comics->price = $data['price'];
+        // $dc_comics->series = $data['series'];
+        // $dc_comics->sale_date = $data['sale_date'];
+        // $dc_comics->type = $data['type'];
+        // $dc_comics->artists = $data['artists'];
+        // $dc_comics->writers = $data['writers'];
+        $dc_comics->fill($data);
         $dc_comics->save();
 
         return redirect()->route('comics.show', $dc_comics->id);
@@ -53,6 +53,7 @@ class ComicsController extends Controller
     public function show(string $id)
     {
         $comics = Comics::find($id);
+        if ($comics === null) abort(500);
         return view('comics.show', compact('comics'));
     }
 
@@ -61,7 +62,9 @@ class ComicsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $comics = Comics::findOrFail($id);
+
+        return view('comics.edit', compact('comics'));
     }
 
     /**
@@ -69,7 +72,11 @@ class ComicsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $comics = Comics::findOrFail($id);
+        $data = $request->all();
+        $comics->update($data);
+
+        return redirect()->route('comics.show', $comics->id);
     }
 
     /**
